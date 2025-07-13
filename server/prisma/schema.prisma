@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Game {
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  state       Json
+  elapsedTime Int
+  isFinished  Boolean  @default(false)
+}
+
+model LeaderboardEntry {
+  id       String   @id @default(uuid())
+  initials String   @db.VarChar(255)
+  time     Int
+  date     DateTime @default(now())
+}

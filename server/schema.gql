@@ -1,0 +1,41 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type GameState {
+  mines: [String!]!
+  revealed: [String!]!
+  flagged: [String!]!
+}
+
+type Game {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  state: GameState!
+  elapsedTime: Int!
+  isFinished: Boolean!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type LeaderboardEntry {
+  id: ID!
+  initials: String!
+  time: Int!
+  date: DateTime!
+}
+
+type Query {
+  topScores: [LeaderboardEntry!]!
+}
+
+type Mutation {
+  startGame: Game!
+  revealCell(gameId: String!, x: Int!, y: Int!): Game!
+  toggleFlag(gameId: String!, x: Int!, y: Int!): Game!
+  submitScore(initials: String!, time: Int!): LeaderboardEntry!
+}
